@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     fontFamily: 'Inter_400Regular',
   },
-  description: {
+  descricao: {
     fontSize: 16,
     fontFamily: 'Inter_400Regular',
   },
