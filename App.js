@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter';
 import React from 'react';
-import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -31,10 +30,7 @@ export default function App() {
 
             <TouchableOpacity style={styles.card}>
               <View style={styles.row}>
-                <MaterialIcons 
-                name="straighten" 
-                size={20} 
-                color="#333" />
+                <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2436/2436849.png' }} style={styles.icon} />
                 <Text style={styles.label}> Tamanho: </Text>
                 <Text style={styles.description}>{camisa.tamanho}</Text>
               </View>
@@ -42,10 +38,7 @@ export default function App() {
 
             <TouchableOpacity style={styles.card}>
               <View style={styles.row}>
-                <MaterialIcons
-                name="palette" 
-                size={20} 
-                color="#333" />
+                <Image source={{ uri: 'https://cdn.prod.website-files.com/665858d6442988bba748fa67/6686f48b418b55ef57faecf9_capa_c33f26b009f302fd97b25c8ad74c9801_2000.png' }} style={styles.icon} />
                 <Text style={styles.label}> Cor: </Text>
                 <Text style={styles.description}>{camisa.cor}</Text>
               </View>
@@ -53,10 +46,7 @@ export default function App() {
 
             <TouchableOpacity style={styles.card}>
               <View style={styles.row}>
-                <FontAwesome5 
-                name="dollar-sign" 
-                size={20} 
-                color="#333" />
+                <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2926/2926236.png' }} style={styles.icon} />
                 <Text style={styles.label}> Valor: </Text>
                 <Text style={styles.description}>{camisa.valor}</Text>
               </View>
@@ -64,10 +54,7 @@ export default function App() {
 
             <TouchableOpacity style={styles.card}>
               <View style={styles.row}>
-                <MaterialIcons 
-                name="layers" 
-                size={20} 
-                color="#333" />
+                <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRszSzu6PLwros8t5W4s_8BZdFcKkwUJe2hfA&s' }} style={styles.icon} />
                 <Text style={styles.label}> Tecido: </Text>
                 <Text style={styles.description}>{camisa.tecido}</Text>
               </View>
@@ -121,6 +108,11 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  icon: {
+    width: 60,
+    height: 60,
+    marginRight: 10,
   },
   title: {
     fontSize: 20,
