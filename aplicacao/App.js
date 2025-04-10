@@ -29,6 +29,7 @@ export default function App() {
             </View>
                   //kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
             <TouchableOpacity style={styles.card}>
+    
               <View style={styles.row}>
                 <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2436/2436849.png' }} style={styles.icon} />
                 <Text style={styles.label}> Tamanho: </Text>
