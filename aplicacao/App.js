@@ -1,12 +1,25 @@
+// App.js
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import { useFonts, Inter_400Regular } from '@expo-google-fonts/inter';
-import React from 'react';
+import React, { useState } from 'react';
+import { FontAwesome5, MaterialIcons, Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
     Inter_400Regular,
   });
+
+  const [favoritos, setFavoritos] = useState([]);
+
+  const toggleFavorito = (index) => {
+    if (favoritos.includes(index)) {
+      setFavoritos(favoritos.filter(i => i !== index));
+    } else {
+      setFavoritos([...favoritos, index]);
+    }
+  };
 
   if (!fontsLoaded) {
     return (
@@ -27,11 +40,10 @@ export default function App() {
               <Text style={styles.title}>{camisa.nome}</Text>
               <Text style={styles.description}>{camisa.descricao}</Text>
             </View>
-                  //kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+
             <TouchableOpacity style={styles.card}>
-    
               <View style={styles.row}>
-                <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2436/2436849.png' }} style={styles.icon} />
+                <MaterialIcons name="straighten" size={24} color="black" style={styles.iconVector} />
                 <Text style={styles.label}> Tamanho: </Text>
                 <Text style={styles.description}>{camisa.tamanho}</Text>
               </View>
@@ -39,7 +51,7 @@ export default function App() {
 
             <TouchableOpacity style={styles.card}>
               <View style={styles.row}>
-                <Image source={{ uri: 'https://cdn.prod.website-files.com/665858d6442988bba748fa67/6686f48b418b55ef57faecf9_capa_c33f26b009f302fd97b25c8ad74c9801_2000.png' }} style={styles.icon} />
+                <FontAwesome5 name="palette" size={24} color="black" style={styles.iconVector} />
                 <Text style={styles.label}> Cor: </Text>
                 <Text style={styles.description}>{camisa.cor}</Text>
               </View>
@@ -47,7 +59,7 @@ export default function App() {
 
             <TouchableOpacity style={styles.card}>
               <View style={styles.row}>
-                <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2926/2926236.png' }} style={styles.icon} />
+                <Entypo name="price-tag" size={24} color="black" style={styles.iconVector} />
                 <Text style={styles.label}> Valor: </Text>
                 <Text style={styles.description}>{camisa.valor}</Text>
               </View>
@@ -55,10 +67,19 @@ export default function App() {
 
             <TouchableOpacity style={styles.card}>
               <View style={styles.row}>
-                <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRszSzu6PLwros8t5W4s_8BZdFcKkwUJe2hfA&s' }} style={styles.icon} />
+                <MaterialCommunityIcons name="tshirt-crew" size={24} color="black" style={styles.iconVector} />
                 <Text style={styles.label}> Tecido: </Text>
                 <Text style={styles.description}>{camisa.tecido}</Text>
               </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.card, { backgroundColor: favoritos.includes(index) ? '#d1e7dd' : '#f8d7da' }]}
+              onPress={() => toggleFavorito(index)}
+            >
+              <Text style={styles.title}>
+                {favoritos.includes(index) ? 'Remover dos Favoritos 💔' : 'Adicionar aos Favoritos ❤️'}
+              </Text>
             </TouchableOpacity>
           </View>
         ))}
@@ -68,13 +89,11 @@ export default function App() {
   );
 }
 
-const Header = ({ title }) => {
-  return (
-    <View style={styles.header}>
-      <Text style={styles.headerTitle}>{title}</Text>
-    </View>
-  );
-};
+const Header = ({ title }) => (
+  <View style={styles.header}>
+    <Text style={styles.headerTitle}>{title}</Text>
+  </View>
+);
 
 const styles = StyleSheet.create({
   header: {
@@ -110,15 +129,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  icon: {
-    width: 60,
-    height: 60,
+  iconVector: {
     marginRight: 10,
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 5,
     fontFamily: 'Inter_400Regular',
   },
   description: {
@@ -142,7 +158,7 @@ const camisas = [
     nome: 'Camisa New Era',
     tamanho: 'GG',
     cor: 'Branco',
-    descricao: 'Camisa branca com logo New Era, ideal para uso casual.',
+    descricao: 'Essa camisa branca da New Era é perfeita para quem busca conforto e estilo. Seu design minimalista combina com qualquer look, e o tecido leve garante uma sensação agradável ao longo do dia.',
     valor: 'R$ 150,00',
     tecido: 'Tweed',
     img: { uri: 'https://images.tcdn.com.br/img/img_prod/712724/camiseta_millionaireboy_new_york_branca_323_1_e6d61226932abbdf73c649cdd52a9766.png' },
@@ -151,7 +167,7 @@ const camisas = [
     nome: 'Camisa Hype x',
     tamanho: 'G',
     cor: 'Preto',
-    descricao: 'Camisa preta com estampa Hype x, perfeita para eventos e shows.',
+    descricao: 'A Camisa Hype X traz um visual ousado e moderno, com corte urbano e detalhes que remetem à cultura streetwear. Ideal para quem curte atitude e presença em qualquer ocasião casual.',
     valor: 'R$ 180,00',
     tecido: 'Linho',
     img: { uri: 'https://images.tcdn.com.br/img/img_prod/712724/camiseta_millionaireboy_hype_street_209_1_40dc1061b36fb8f77474bb59f889ed55.png' },
@@ -160,9 +176,27 @@ const camisas = [
     nome: 'Baseball Classic',
     tamanho: 'G',
     cor: 'Branco',
-    descricao: 'Camisa branca estilo baseball clássica, confortável e estilosa.',
+    descricao: 'Inspirada nos uniformes tradicionais de baseball americano, essa camisa une nostalgia e modernidade. Com detalhes sutis e corte confortável, é perfeita para um visual retrô e estiloso.',
     valor: 'R$ 160,00',
-    tecido: 'poliamida',
+    tecido: 'Poliamida',
     img: { uri: 'https://media.istockphoto.com/id/938415082/pt/vetorial/specification-baseball-t-shirt-mockup-isolated-on-white-background-a-sample-design-elements.jpg?s=612x612&w=0&k=20&c=swyv5oA6g-BPmU3oxJzBbr-PJUzSIB_W-8x-BsQT6Xk=' },
+  },
+  {
+    nome: 'Camisa Oversized Grafite',
+    tamanho: 'M',
+    cor: 'Cinza escuro',
+    descricao: 'Essa camisa oversized na cor grafite oferece um caimento solto e moderno. O tecido premium proporciona toque macio e alta durabilidade, perfeita para compor looks urbanos e descolados.',
+    valor: 'R$ 140,00',
+    tecido: 'Algodão egípcio',
+    img: { uri: 'https://cdn.pixabay.com/photo/2017/08/06/11/40/t-shirt-2597195_1280.png' },
+  },
+  {
+    nome: 'Camisa Art Street',
+    tamanho: 'G',
+    cor: 'Colorido',
+    descricao: 'Estampada com arte urbana vibrante, essa camisa é para quem ama originalidade. Ideal para quem curte moda com personalidade, ela transforma qualquer look básico em algo criativo e marcante.',
+    valor: 'R$ 200,00',
+    tecido: 'Poliéster reciclado',
+    img: { uri: 'https://cdn.pixabay.com/photo/2021/11/16/22/18/tshirt-6800423_1280.png' },
   },
 ];
